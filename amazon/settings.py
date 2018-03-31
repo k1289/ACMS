@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'repairs.apps.RepairsConfig',
+    'mysite',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,6 +69,7 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/'
 WSGI_APPLICATION = 'amazon.wsgi.application'
 
 
