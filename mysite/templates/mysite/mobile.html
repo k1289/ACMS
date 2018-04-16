@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html ng-app="restApp">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<!--   <script src="{% static 'js/angular-1.6.9.js' %}"></script> -->
+  <script src="{% static 'js/Products/app.js' %}"></script>
+ {% verbatim %}
+    <div ng-controller="ProductTypeCtrl">
+      <!-- <li ng-repeat="product in products ", -->
+    <li ng-repeat="product in products | unique: 'ProductModel'" ng-show="product.ProductType == 'Mobile'"  >
+   {{product.ProductModel}}   
+    </li>
+    </div>
+    {% endverbatim %}
+
+</html>
