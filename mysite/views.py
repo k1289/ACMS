@@ -12,22 +12,21 @@ from .forms import UserRegistrationForm
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-from .models import Product
+from rest_framework import permissions, viewsets
+from rest_framework.response import Response
+from rest_framework import status,views
 
-class ProductListView(ListView):
 
-    model = Product
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+import json
 
 
 # Create your views here.
 
 def home(request):
     return render(request, 'mysite/home.html')
+
+def laptop(request):
+    return render(request, 'mysite/laptop.html')
 
 def register(request):
     if request.method == 'POST':
@@ -50,6 +49,63 @@ def register(request):
 
     return render(request, 'mysite/register.html', {'form' : form})
 
+
+
+# class AccountViewSet(viewsets.ModelViewSet):
+#     lookup_field = 'username'
+#     queryset = Account.objects.all()
+#     serializer_class = AccountSerializer
+
+#     def get_permissions(self):
+#         if self.request.method in permissions.SAFE_METHODS:
+#             return (permissions.AllowAny(),)
+
+#         if self.request.method == 'POST':
+#             return (permissions.AllowAny(),)
+
+#         return (permissions.IsAuthenticated(), IsAccountOwner(),)
+
+#     def create(self, request):
+#         serializer = self.serializer_class(data=request.data)
+
+#         if serializer.is_valid():
+#             Account.objects.create_user(**serializer.validated_data)
+#             return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+
+#         return Response({
+#             'status': 'Bad request',
+#             'message': 'Account could not be created with received data.'
+#         }, status=status.HTTP_400_BAD_REQUEST)
+    
+
+# class LoginView(views.APIView):
+#     def post(self, request, format=None):
+#         data = json.loads(request.body)
+
+#         email = data.get('email', None)
+#         password = data.get('password', None)
+
+#         account = authenticate(email=email, password=password)
+
+#         if account is not None:
+#             if account.is_active:
+#                 login(request, account)
+
+#                 serialized = AccountSerializer(account)
+
+#                 return Response(serialized.data)
+#             else:
+#                 return Response({
+#                     'status': 'Unauthorized',
+#                     'message': 'This account has been disabled.'
+#                 }, status=status.HTTP_401_UNAUTHORIZED)
+#         else:
+#             return Response({
+#                 'status': 'Unauthorized',
+#                 'message': 'Username/password combination invalid.'
+#             }, status=status.HTTP_401_UNAUTHORIZED)
+
+
 # def laptopIndex(request):
 #     return HttpResponse("<h1>This is laptop index</h1>")
 
@@ -57,12 +113,4 @@ def register(request):
 #     return HttpResponse("<h2> </h2>")
 
 
-class ProductListlView(ListView):
-
-    model = Product
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductListlView,self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
 

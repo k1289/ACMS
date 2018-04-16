@@ -3,6 +3,7 @@ from django.template import loader
 # Create your views here.
 from .models import Products, Service_Centres
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 def index(request):
     latest_product_list = Products.objects.order_by('ProductName')[:100]
@@ -17,3 +18,6 @@ def centres(request,product_id):
 	except Products.DoesNotExist:
 		raise Http404("Product does not exist")
 	return render(request, 'repairs/centres.html',context)
+
+
+
