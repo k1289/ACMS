@@ -3,33 +3,44 @@
 /* App Module */
 
 var restApp = angular.module("restApp", [
- 
-  /*'ngRoute',*/
+ /*
+  'ngRoute',*/
 ]);
 
-
+restApp.config(['$locationProvider', function($locationProvider) {
+        $locationProvider.html5Mode(true);
+    }]);
 
 restApp.controller("ProductTypeCtrl", 
   function($scope,$http) {
     $http.get('http://127.0.0.1:8000/api/products') .then(function(response) {
       $scope.products = response.data;
-      $scope.productByType = function(myProductType,product){
-         
-          if(product.ProductType == myProductType) {
-              // add it to our keys array
-              // push this item to our final output array
-              return true;
-          }
-          return false;
+
        
-   };  
+   });
+    $scope.val='Likki';
+     });
+ restApp.controller("ProductModelCtrl", 
+   function($scope,$location,$http) {
+   
+    $http.get('http://127.0.0.1:8000/api/products') .then(function(response) {
+      $scope.products = response.data;
+       
+   });
+    if ( $location.search().hasOwnProperty( 'pType' ) ){
+       $scope.pType=$location.search()['pType'];
+
+     }
+     }); 
     
-  });
+
     
-  });
+ 
+    
+
 
 restApp.filter('unique', function() {
-   // we will return a function which will take in a collection
+
    // and a keyname
    return function(collection, keyname) {
       // we define our output and keys array;
@@ -55,17 +66,13 @@ restApp.filter('unique', function() {
    };
 });
 
-/*restApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('', {
-        templateUrl: 'mysite/home.html',
-        controller: 'ProductTypeCtrl'
-      }).
-      when('/products/', {
-        templateUrl: 'product-detail.html',
-        controller: 'CategoryDetailCtrl'
-  
-      });
-  }]);*/
+/*restApp.config(
+  function ($routeProvider, $locationProvider) {
+        // configure the routing rules here
+        $routeProvider.when('/:productType', {
+            controller: 'ProductModelCtrl'
+        });
 
+        // enable HTML5mode to disable hashbang urls
+        $locationProvider.html5Mode(true);
+    });*/

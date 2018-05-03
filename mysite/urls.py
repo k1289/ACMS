@@ -2,8 +2,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
-from .views import home,register,laptop
-
+from .views import home,register,productModels
 
 
 
@@ -15,7 +14,7 @@ urlpatterns = [
     path('', home),
     path('register/',register),
     path('api/products',include("mysite.api.urls"),name="products-api"),
-    path('product/Laptop',laptop),
+    path('products/',productModels),
    	#url(r'^products/', ProductListView.as_view(), name='products')
    # url(r'^(?product/<int:pk>\d+)$', views.BookDetailView.as_view(), name='product-detail')
    

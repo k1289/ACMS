@@ -25,8 +25,10 @@ import json
 def home(request):
     return render(request, 'mysite/home.html')
 
-def laptop(request):
-    return render(request, 'mysite/laptop.html')
+# def productModels(request,productType):
+#     return render(request, 'mysite/productModels.html')
+def productModels(request):
+    return render(request, 'mysite/productModels.html')
 
 def register(request):
     if request.method == 'POST':
