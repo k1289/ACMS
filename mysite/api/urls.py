@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
 from .views import (
-	ProductsListAPIView
+	ProductsListAPIView,
+	ServiceCentersListAPIView
 	)
 urlpatterns=[
-	path('',ProductsListAPIView.as_view(), name='list'),
+	path('products',ProductsListAPIView.as_view(), name='list'),
+	path('servicecenters',ServiceCentersListAPIView.as_view(), name='list'),
 	
 ]

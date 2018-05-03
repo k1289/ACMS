@@ -13,7 +13,7 @@ urlpatterns = [
     path('logout/', auth_views.logout, {'template_name': 'registration/logged_out.html'}, name='logout'),
     path('', home),
     path('register/',register),
-    path('api/products',include("mysite.api.urls"),name="products-api"),
+    path('api/',include("mysite.api.urls"),name="products-api"),
     path('products/',productModels),
    	#url(r'^products/', ProductListView.as_view(), name='products')
    # url(r'^(?product/<int:pk>\d+)$', views.BookDetailView.as_view(), name='product-detail')
