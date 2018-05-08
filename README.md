@@ -3,7 +3,7 @@
 Amazon Repairs
 
 ## Prerequisites:
-Python 3 and Django 2.0.3
+Python 3 and Django 2.0.3 RestAPIFramework
 
 ## Getting Started:
 1. Clone the directory on your local computer.
@@ -19,6 +19,10 @@ Python 3 and Django 2.0.3
 4. register/
 5. admin/
 6. repairs/
+7. api/products
+8. service_centres/sc
+7. sl/<pk>
+
 
 
 
