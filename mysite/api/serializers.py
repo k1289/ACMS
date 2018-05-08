@@ -1,21 +1,36 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from repairs.models import Products,Service_Centres
 
 class ProductsSerializer(ModelSerializer):
 	class Meta:
-		model = Products
+		model = Products 
 		fields = [
 		'ProductType',
 		'ProductModel',
-		'ProductId'
 
 		]
+		
 
-class ServiceCentersSerializer(ModelSerializer):
+class ServiceCentreSerializer(ModelSerializer):
 	class Meta:
-		model =Service_Centres		
+		model = Service_Centres
 		fields = [
-		'ScID',
 		'ScName',
-		'ScProductID'
+		'ScLocation',
+
 		]
+
+
+class ProductDetailSerializer(ModelSerializer):
+	sq=SerializerMethodField()
+	class Meta:
+		model =Products
+		fields = [
+		'sq',
+
+		]
+				
+	def get_sq(self, obj):
+		q=obj.ProductServiceCentres.all()
+		return str(q)
+		
