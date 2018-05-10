@@ -1,0 +1,9 @@
+{% if service_centre_list %}
+    <ul>
+    {% for cntr in service_centre_list %}
+        <li>{{ cntr.ScName }} {{ cntr.ScLocation }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No centres are available.</p>
+{% endif %}
