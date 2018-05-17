@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'repairs.apps.RepairsConfig',
     'mysite',
+    'orders',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
