@@ -1,17 +1,21 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from repairs.models import Products,Service_Centres
-from .serializers import ProductsSerializer,ServiceCentersSerializer
-class ProductsListAPIView(ListAPIView):
+#from mysite.models import Profile,Order
+from .serializers import (ProductsSerializer,ServiceCentreSerializer,ProductDetailSerializer)
+
+class ProductsListAPIView(CreateAPIView):
 	queryset = Products.objects.all()
 	serializer_class=ProductsSerializer
-class ServiceCentersListAPIView(ListAPIView):
+
+class ServiceCentreListAPIView(ListAPIView):
 	queryset = Service_Centres.objects.all()
-	serializer_class=ServiceCentersSerializer
-
-# class CategoryListView(TemplateView):
-#     template_name = "category-list.html"    
-    
-# class CategoryDetailView(TemplateView):
-# 	template_name = "category-detail.html" 
+	serializer_class=ServiceCentreSerializer
 	
+class ServiceProductAPIView(RetrieveAPIView):
+	queryset = Products.objects.all()
+	serializer_class=ProductDetailSerializer
 
+class ServiceRetrieveAPIView(RetrieveAPIView):
+	queryset = Service_Centres.objects.all()
+	serializer_class=ServiceCentreSerializer
+	
