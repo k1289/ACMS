@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Amazon Repairs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+  </head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+	
+<header class="masthead" rel="stylesheet" href="css/login.css">
+
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To Amazon Repairs!</div>
+          <div class="intro-heading text-uppercase">Your one-stop-shop</div>
+        </div>
+      </div>
+</header>
+
+
+<div class="row">
+  <div style="margin:0 auto;width:80%;text-align:left">
+    <h1>Login</h1>
+
+
+
+<div style="margin:0 auto;width:80%;text-align:left">
+
+  <form method="post">
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="w3-btn w3-green w3-ripple" type="submit">Login</button>
+  </form>
+</div>
+</div>
+
+</div>
+</html>
