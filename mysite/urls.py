@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
-from .views import home,register,productModels, scregister
+from .views import home,register,productModels
 
 
 
@@ -12,8 +12,7 @@ urlpatterns = [
    	#path('api/v1/', include(router.urls)),
     path('logout/', auth_views.logout, {'template_name': 'registration/logged_out.html'}, name='logout'),
     path('', home),
-    path('registration/register.html',register),
-    path('registration/scregister.html', scregister),
+    path('register/',register),
     path('api/',include("mysite.api.urls"),name="products-api"),
     path('products/',productModels),
    	#url(r'^products/', ProductListView.as_view(), name='products')
