@@ -5,12 +5,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.contrib.auth.models import User
-from django.db.models import Service_Centres
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 from .forms import UserRegistrationForm
-from .forms import ScRegistrationForm
 from django.views.generic.list import ListView
 from django.utils import timezone
 
@@ -51,32 +49,7 @@ def register(request):
     else:
         form = UserRegistrationForm()
 
-    return render(request, 'registration/register.html', {'form' : form})
-
-def scregister(request):
-    if request.method == 'POST':
-        form = ScRegistrationForm(request.POST)
-        if form.is_valid():
-            scObj = form.cleaned_data
-            ScName = scObj['ScName']
-            ScEmailID =  scObj['ScEmailID']
-            ScLocation =  scObj['ScLocation']
-            ScPhoneNum = scObj['ScPhoneNum']
-            Official = scObj['Official']
-            if not (Service_Centres.objects.filter(ScName=ScName).exists() or Service_Centres.objects.filter(ScEmailID=ScEmailID).exists()):
-                Service_Centres.objects.create_user(ScName, ScEmailID, ScLocation, ScPhoneNum, Official)
-                user = authenticate(ScName=ScName, ScEmailID=ScEmailID)
-                login(request, user)
-                return HttpResponseRedirect('/')
-            else:
-                raise forms.ValidationError('Looks like this service centre already exists')
-
-    else:
-        form = ScRegistrationForm()
-
-    return render(request, 'registration/scregister.html', {'form' : form})
-
-
+    return render(request, 'mysite/register.html', {'form' : form})
 
 
 
