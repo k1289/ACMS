@@ -8,19 +8,20 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm,ScRegistrationForm
 from django.views.generic.list import ListView
 from django.utils import timezone
 
 from rest_framework import permissions, viewsets
 from rest_framework.response import Response
 from rest_framework import status,views
-
+from django.db import IntegrityError
 
 import json
 
 
 # Create your views here.
+
 
 def home(request):
     return render(request, 'mysite/home.html')
@@ -34,29 +35,57 @@ def productSC(request):
 def scDetail(request):
     return render(request, 'mysite/scDetail.html')
 
+def dashboard(request):
+    return render(request, 'registration/dashboardU.html')
+
 def register(request):
+    try:
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                userObj = form.cleaned_data
+                username = userObj['username']
+                email =  userObj['email']
+                password =  userObj['password']
+                if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+                    User.objects.create_user(username, email, password)
+                    user = authenticate(username = username, password = password)
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    raise forms.ValidationError('Looks like a username with that email or password already exists')
+
+        else:
+            form = UserRegistrationForm()
+
+    except IntegrityError as e:
+        return render(request,"mysite/err.html")
+    #print (str('Welcome') +' '+str(username))
+    return render(request, 'registration/register.html', {'form' : form})
+
+
+def scregister(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = ScRegistrationForm(request.POST)
         if form.is_valid():
-            userObj = form.cleaned_data
-            username = userObj['username']
-            email =  userObj['email']
-            password =  userObj['password']
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-                User.objects.create_user(username, email, password)
-                user = authenticate(username = username, password = password)
+            scObj = form.cleaned_data
+            ScName = scObj['ScName']
+            ScEmailID =  scObj['ScEmailID']
+            ScLocation =  scObj['ScLocation']
+            ScPhoneNum = scObj['ScPhoneNum']
+            Official = scObj['Official']
+            if not (Service_Centres.objects.filter(ScName=ScName).exists() or Service_Centres.objects.filter(ScEmailID=ScEmailID).exists()):
+                Service_Centres.objects.create_user(ScName, ScEmailID, ScLocation, ScPhoneNum, Official)
+                user = authenticate(ScName=ScName, ScEmailID=ScEmailID)
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
-                raise forms.ValidationError('Looks like a username with that email or password already exists')
+                raise forms.ValidationError('Looks like this service centre already exists')
 
     else:
-        form = UserRegistrationForm()
+        form = ScRegistrationForm()
 
-    return render(request, 'mysite/register.html', {'form' : form})
-
-
-
+    return render(request, 'registration/scregister.html', {'form' : form})
 # class AccountViewSet(viewsets.ModelViewSet):
 #     lookup_field = 'username'
 #     queryset = Account.objects.all()

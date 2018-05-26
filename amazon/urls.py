@@ -32,4 +32,5 @@ urlpatterns = [
     path('repairs/',include('repairs.urls')),
     path('admin/', admin.site.urls),
     path('', include('mysite.urls')),
+    path('api/',include('orders.urls')),
 ]

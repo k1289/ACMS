@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html  lang="en" >
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>var userId = {{ user.id }}; </script>
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+ <script src="{% static 'js/dashb.js' %}"></script>
+ <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+{% load staticfiles %}
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+
+
+ <script src="{% static 'js/Products/app1.js' %}"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<body ng-app="ordersApp" class="home">
+    <div ng-controller="DBrequestsCtrl" class="container-fluid display-table">
+        <div class="row display-table-row">
+            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+                <div class="logo">
+                    
+                        <img src="{% static 'img/header-bg.jpg' %}"  class="hidden-xs hidden-sm">
+                       
+                   
+                </div>
+                <div class="navi">
+                    
+     {% verbatim %} 
+    
+        
+                    <ul>
+                        <li > <i aria-hidden="true"></i><button ng-click="ShowRequests()" class="hidden-xs hidden-sm">My requests
+                        </button> </li>
+                        <li><i  aria-hidden="true"></i><button ng-click="ShowDetails()"class="hidden-xs hidden-sm">My details</button> </li>
+                    </ul>
+                
+                    
+                     {% endverbatim %}
+    
+  
+                </div>
+            </div>
+                <div class="col-md-10 col-sm-11 display-table-cell v-align">
+                
+                <div class="row">
+                    <header>
+                        <nav>
+                        <div class="col-md-12">
+                            
+                                
+                        <div class="col-md-12">
+                            <div class="header-rightside">
+                                <ul class="header-top pull-right ">
+
+                                    
+                                    <li><a href="/"> Home </a></li>
+                                    <li>
+                                        <a href="/logout" class="icon-info">
+                                           Logout
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                          
+                          </div>
+                      </nav>
+                    </header>
+                </div>
+
+      
+  <!--   <div ng-controller="DBrequestsCtrl">
+        
+                <div class="user-dashboard">
+                    <h1>Hellooo!</h1>
+                    <div> {% verbatim %}{{val}}{% endverbatim %}</div>
+
+ </div>
+ </div> -->
+ <div class="user-dashboard">
+    {% verbatim %}
+                    <h1>Hellooo!</h1>
+                    
+                   
+
+</div>
+    <div ng-show="requests">
+    Please reconfirm your username
+    <input ng-model="val">
+    <table  style="width:100%">
+    <tr >
+    <th>ORDER ID</th>
+    <th>PRODUCT ID</th>
+    <th>PROBLEM</th>
+    <th> DATE OF REQUEST</th>
+    <th> # DAYS </th>
+    </tr>
+    <tr ng-repeat="order in orders" ng-show="CheckUser(order.user)">
+   <td>{{order.OrderId}}</td> 
+   <td>{{order.product}}</td>
+   <td> {{order.Problem}}</td>
+   <td>{{order.Dateofrequest}}</td>
+   <td> {{order.NumOfrepairdays}}</td>
+
+</tr>
+    </div>
+    
+    </div>
+    </table>
+    
+    </div>
+    <div ng-show="details" class="user-dashboard">
+    {% endverbatim %}
+
+                    <h4>Username: {{user.username}}</h4>
+                    <h4>First Name: {{user.first_name}} </h4>
+                    <h4>Last Name: {{user.last_name}} </h4>
+                    <h4>Email Address: {{user.email}} </h4>
+                    <h4>Admin Status: {{user.is_staff}} </h4>                
+    </div>
+
+
+    
+    </div>
+   
+   
+</div>
+</div>
+
+
+</body>
+</html>

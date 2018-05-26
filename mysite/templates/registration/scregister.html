@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Amazon Repairs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+  </head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+  
+<header class="masthead" rel="stylesheet" href="css/login.css">
+
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To Amazon Repairs!</div>
+          <div class="text-uppercase text-center">Your Product Support Centre</div>
+        </div>
+      </div>
+</header>
+
+<body>
+    <div class="signup">
+    <h1>SignUp</h1>
+    <header>Please register to continue</header>
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="button">SignUp</button>
+      </form>
+    </div>
+    
+</body>
+
+</html> 
+<style type="text/css">
+  div.signup {
+    width: 700px;
+    padding: 10px;
+    border: 5px solid black;
+    margin: 350px;
+    align: center;
+    position: absolute;
+    top: 35%;
+    left: 15%;
+}
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>

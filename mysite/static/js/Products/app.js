@@ -1,7 +1,4 @@
-
-
 /* App Module */
-
 var restApp = angular.module("restApp", [
  /*
   'ngRoute',*/
@@ -46,21 +43,17 @@ restApp.controller("ProductTypeCtrl",
      }
      }); 
 
-  restApp.controller("SCDetailCtrl", 
-
-     
-   function($scope,$location,$http) {
-    $scope.sID=0;
-    if ( $location.search().hasOwnProperty( 'sID' )){
-        $scope.sID=$location.search()['sID'];
-        $http.get('http://127.0.0.1:8000/api/sc').then(function(response){
-          $scope.scList = response.data;
-          });
-     }
-     });   
+  
 
     
  
+    
+
+  
+       
+    
+      
+    
     
 
 

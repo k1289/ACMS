@@ -1,18 +1,164 @@
 {% load static %}
 <!DOCTYPE html>
-<html ng-app="restApp">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <!--  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-route.js"></script> -->
-<!--   <script src="{% static 'js/angular-1.6.9.js' %}"></script> -->
-  <script src="{% static 'js/Products/app.js' %}"></script>
- {% verbatim %}
+<html lang="en" ng-app="requestApp">
 
-    <div ng-controller="SCDetailCtrl">
-    <li ng-repeat="sc in scList" ng-show="sc.ScID == sID"  >
-  	<div>Welcome to {{sc["ScName"]}}</div>
-  </li>
-   </div>
+<head>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Amazon Repairs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+  </head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        {% if user.is_authenticated %}
+        <a class="navbar-brand js-scroll-trigger" href="/">Hello {{ user.username }}</a>
+        {% else %}
+        <a class="navbar-brand js-scroll-trigger" href="/"> Hello Guest user </a>
+         {% endif %}
+   
+
+        <!-- <div class="collapse navbar-collapse" id="navbarResponsive"> -->
+          <ul class="navbar-nav text-uppercase ml-auto">
+             {% if user.is_authenticated %}
+       <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  href="/dashboard">Profile</a>
+            </li>   
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger"  href="/">Home</a>
+            </li>           
+         <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/logout">Logout</a>
+            </li>
+         {% else %}
+
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/register">Signup</a>
+            </li>
+            
+              {% endif %}
+          
+      </div>
+    </nav>
+
+
+  
+<header class="masthead" rel="stylesheet" href="css/login.css">
+
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Welcome To Amazon Repairs!</div>
+          <div class="text-uppercase text-center">Your Product Support Centre</div>
+        </div>
+      </div>
+</header>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+  
+  <script src="{% static 'js/Products/app2.js' %}"></script>
+
+  <section>
+    {% verbatim %}
+    <div class="signup" ng-controller="SCDetailCtrl">
+    <i ng-repeat="sc in scList" ng-show="sc.ScID == sID"  >
+    <div class="text-center" style="font-size:180%">Welcome to {{sc["ScName"]}} in {{sc["ScLocation"]}}
+        
+    </div>
+  </i>
+            <form class="form-group" ng-submit="submit()" ng-controller="PlaceRequestCtrl">
+              {% endverbatim %}
+
+              {% csrf_token %}
+              {% verbatim %}
+            <div class="text-center">
+            User ID
+            <input type="number" ng-model="user" name="text" />
+            <br/><br/>
+           <label for="probDesc" style="font-size:100%"> Please enter problem description of your product</label> </br>
+            <input type="text" ng-model="problem" name="text" />
+            <br/><br/>
+            <button id="submit" type="submit" class="button" onclick="myFunction()">Place request
+            <a href="/"></a>
+          </button>
+        </div>
+        </form>
+        </div>
+  
+
+          
+
+          <p id="demo"></p>
+
+          <script>
+          function myFunction() {
+              var txt;
+              if (confirm("Your order has been placed. Your service centre will contact you soon.")) {
+                 location.href = "http://127.0.0.1:8000";
+              }
+              document.getElementById("demo").innerHTML = txt;
+          }
+          </script>
+
+        </form>
+  </div>
+  </i>
+  </div>
+  </section>
 {% endverbatim %}
 
+  
+<style type="text/css">
+div.signup {
+    width: 1000px;
+    padding: 5px;
+    border: 5px solid black;
+    margin: 350px;
+    position: absolute;
+    top: 35%;
+    left: 5%;
+}
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+
+  </section>
+ 
 </html>
